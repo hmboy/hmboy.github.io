@@ -12,11 +12,11 @@ baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
 RSS: false
-weibo_username: 反王之血必以剑终     
-zhihu_username: hmboy   
+#weibo_username: 反王之血必以剑终     
+#zhihu_username: hmboy   
 github_username:    hmboy   
-twitter_username:   hmboy 
-facebook_username:  hmboy 
+#twitter_username:   hmboy 
+#facebook_username:  hmboy 
 
 
 
@@ -48,7 +48,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hmboy
+# disqus_username: hmboy
 # Duoshuo settings
 # duoshuo_username: #huxblog
 # Share component is depend on Comment so we can NOT use share only.
@@ -81,21 +81,21 @@ featured-condition-size: 0              # A tag will be featured if the size of 
 
 
 # Friends
-friends: [
-    {
-        title: "Leonard",
-        href: ""
-    },{
-        title: "Foo",
-        href: "#"
-    },{
-        title: "Bar",
-        href: "#"
-    },{
-        title: "Example Friends",
-        href: "#"
-    },{
-        title: "It helps SEO",
-        href: "#"
-    }
-]
+# friends: [
+    # {
+        # title: "Leonard",
+        # href: ""
+    # },{
+        # title: "Foo",
+        # href: "#"
+    # },{
+        # title: "Bar",
+        # href: "#"
+    # },{
+        # title: "Example Friends",
+        # href: "#"
+    # },{
+        # title: "It helps SEO",
+        # href: "#"
+    # }
+# ]
