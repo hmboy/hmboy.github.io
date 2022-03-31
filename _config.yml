@@ -6,17 +6,17 @@ email: khoing@163.com
 description: "好记性不如烂笔头"
 keyword: ""
 url: "https://hmboy.github.io"              # your host, for absolute URL
-baseurl: "/hmboy"         # for example, '/blog' if your blog hosted on 'host/blog'
+#baseurl: "/hmboy"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
 weibo_username: 反王之血必以剑终     
-zhihu_username:     
-github_username: hmboy   
-#twitter_username:  
-facebook_username:  
+zhihu_username: hmboy   
+github_username:    hmboy   
+twitter_username:   hmboy 
+facebook_username:  hmboy 
 
 
 
