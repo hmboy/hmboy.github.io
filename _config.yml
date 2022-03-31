@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: khoing@163.com
 description: "好记性不如烂笔头"
 keyword: ""
-url: "https://hmboy.github.io"              # your host, for absolute URL
+#url: "https://hmboy.github.io"              # your host, for absolute URL
 #baseurl: "/hmboy"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
