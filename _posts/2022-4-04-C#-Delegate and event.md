@@ -10,9 +10,11 @@ tags:
 
 
 
-# C# 委托与事件
+# C# 委托
 
-## 为什么需要委托
+## Delegate
+
+### 为什么需要委托
 
 - 比如有个发消息的业务代码
 
@@ -40,7 +42,7 @@ tags:
 
   - 随着发送的方式越来越多，导致不得不修改枚举和`SendMessage`函数
 
-## 委托定义
+### 委托定义
 
 -  是存有对某个方法的引用的一种引用类型变量，类似c中函数指针
 
@@ -81,11 +83,13 @@ tags:
 
 - 以后添加新的发送方式的话 `SendMessage`也不会再修改
 
-## 事件
+## event
 
 - 由于委托第一个方法注册用`=`，是赋值语法，因为要进行实例化，第二个方法注册则用的是`+=`。但是，不管是赋值还是注册，都是将方法绑定到委托上，除了调用时先后顺序不同，再没有任何的分别。
 
-- 由此对此进行了封装，引出了事件
+  - delegate可以使用`=`对所有已经订阅的取消，只保留`=`后新的订阅
+
+- 由此对此进行了封装，引出了事件，event只能使用`+=``-=`不能直接使用`=`
 
   - ```c#
     //类似属性封装
@@ -115,7 +119,7 @@ tags:
     }
     ```
 
-## Observer设计模式
+### Observer设计模式
 
 - 假设我们有个高档的热水器，我们给它通上电，当水温超过95度的时候：
   - 1、扬声器会开始发出语音，告诉你水的温度；
@@ -164,7 +168,7 @@ tags:
   }
   ```
 
-### Observer设计模式简介
+#### Observer设计模式简介
 
 上面的例子显然能完成我们之前描述的工作，但是却并不够好。现在假设热水器由三部分组成：热水器、警报器、显示器，它们来自于不同厂商并进行了组装。那么，应该是**热水器**仅仅负责烧水，它不能发出警报也不能显示水温；在水烧开时由**警报器**发出警报、**显示器**显示提示和水温。
 
@@ -215,7 +219,7 @@ public class Display{
 
 类似这样的例子是很多的，GOF对它进行了抽象，称为Observer设计模式：**Observer设计模式是为了定义对象间的一种一对多的依赖关系，以便于当一个对象的状态改变时，其他依赖于它的对象会被自动告知并更新。Observer模式是一种松耦合的设计模式。**
 
-### 实现范例的Observer设计模式
+#### 实现范例的Observer设计模式
 
 ```c#
 using System;
@@ -383,9 +387,115 @@ namespace Delegate
 }
 ```
 
+## EventHandler
+
+- 内部采用委托来实现
+- **EventHandler相当于可以带很多参数的无返回值的委托**
+
+- ```c#
+  public event EventHandler<StudentClass> showStudentInfo;
+  StudentClass student = new StudentClass("12","lp","man");
+  
+  Test(showStudentInfo);
+  private void Test(EventHandler eventHandler)
+  {
+      showStudentInfo(this ,student);
+  }
+  //其中 写类对参数列表类进行继承
+  public class StudentClass : EventArgs
+  {
+      public string age;
+      public string name;
+      public string sex;
+  
+      public StudentClass(string _age,string _name,string _sex)
+      {
+          age = _age;
+          name = _name;
+          sex = _sex;
+      }
+  }
+  ```
+
+## Action
+
+- Action 内部是由delegate实现的
+
+- **Action相当于可以带很多参数的无返回值的委托**
+
+  - ```C#
+    public Action<string, int> action;
+    public void Action1(string str,int a)
+    {
+        print(str + a.ToString()); 
+    }
+    action = Action1;
+    ```
+
+- 当普通的delegate定义的参数与Action个数、类型一致时，两者实现的功能是一样的。只是Action的方式更加简洁
+
+  ```c#
+  public delegate void DoDelegate(object parm);
+  public DoDelegate DoMethod;
+  
+  public Action<object> doAction4OneParm;
+  public Action<object, object> doAction4TwoParm;
+  
+  private void Form1_Load(object sender, EventArgs e)
+  {
+      DoMethod += DoTestMetohd;  //普通委托(由于委托定义时给定一个参数，故此处匹配一个参数的方法)
+      doAction4OneParm += DoTestMetohd;  //Action委托(此处匹配一个参数的方法)
+      doAction4TwoParm += DoTestMetohd;  //Action委托(此处匹配两个参数的方法)
+  }
+  
+  private void DoTestMetohd(object parm)
+  {
+      MessageBox.Show(Convert.ToString(parm));
+  }
+  
+  private void DoTestMetohd(object parm1, object parm2)
+  {
+      MessageBox.Show(Convert.ToString(parm1 + " " + parm2));
+  }
+  ```
+
+- 而Action与delegate更重要的一个区别在于泛型，即Action的内部使用了泛型+委托，且泛型的方法的参数个数可扩展到16个
+
+- ```c#
+  1 namespace System
+   2 {
+   3     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
+   4     public delegate void Action<in T1, in T2, in T3, in T4, in T5, in T6, in T7, in T8, in T9>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9);
+   5 
+  ```
+
+## Func
+
+- **Func可以带很多参数，但是必须带返回值的委托**
+
+- Func<T1,T2,T3,T4,TResult> func；
+
+- ```c#
+  public Func<string , bool> func;
+  public bool Func1(string str)
+  {
+      print(str);
+  
+      return true;
+  }
+  func = Func1;
+  ```
+
+
+
 
 
 ----
 
-以上摘自[(6条消息) C# 委托(delegate)和事件(event)详解__Adwore的博客-CSDN博客_c# delegate event](https://blog.csdn.net/life_is_crazy/article/details/78206166)
+以上摘自
+
+- [(6条消息) C# 委托(delegate)和事件(event)详解__Adwore的博客-CSDN博客_c# delegate event](https://blog.csdn.net/life_is_crazy/article/details/78206166)
+- [C#:关于Action和Func以及Eventhandler的区别 - 怪力~乱神 - 博客园 (cnblogs.com)](https://www.cnblogs.com/zbyglls/p/11798808.html)
+
+
 
