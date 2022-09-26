@@ -26,21 +26,21 @@ tags:
 
 对上图的一些说明：
 
-\1) System.Object 类：大家都知道在.Net中所有类型的基类,DispatcherObject 就继承于它，所以它是WPF的基类。
+1) System.Object 类：大家都知道在.Net中所有类型的基类,DispatcherObject 就继承于它，所以它是WPF的基类。
 
-\2) System.Windows.Threading.DispatcherObject 类：从图中看WPF 中的使用到的大部分控件与其他类大多是继承 DispatcherObject 类，它提供了用于处理并发和线程的基本构造。
+2) System.Windows.Threading.DispatcherObject 类：从图中看WPF 中的使用到的大部分控件与其他类大多是继承 DispatcherObject 类，它提供了用于处理并发和线程的基本构造。
 
-\3) System.Windows.DependencyObject类：对WPF中的依赖项属性承载支持与 附加属性承载支持，表示参与 依赖项属性 系统的对象。
+3) System.Windows.DependencyObject类：对WPF中的依赖项属性承载支持与 附加属性承载支持，表示参与 依赖项属性 系统的对象。
 
-\4) System.Windows.Media.Visual类：为 WPF 中的呈现提供支持，其中包括命中测试、坐标转换和边界框计算等。
+4) System.Windows.Media.Visual类：为 WPF 中的呈现提供支持，其中包括命中测试、坐标转换和边界框计算等。
 
-\5) System.Windows.UIElement 类：UIElement 是 WPF 核心级实现的基类，该类是 Windows Presentation Foundation (WPF) 中具有可视外观并可以处理基本输入的大多数对象的基类。
+5) System.Windows.UIElement 类：UIElement 是 WPF 核心级实现的基类，该类是 Windows Presentation Foundation (WPF) 中具有可视外观并可以处理基本输入的大多数对象的基类。
 
-\6) System.Windows.FrameworkElement类：为 Windows Presentation Foundation (WPF) 元素提供 WPF 框架级属性集、事件集和方法集。此类表示附带的 WPF 框架级实现，它是基于由UIElement定义的 WPF 核心级 API 构建的。
+6) System.Windows.FrameworkElement类：为 Windows Presentation Foundation (WPF) 元素提供 WPF 框架级属性集、事件集和方法集。此类表示附带的 WPF 框架级实现，它是基于由UIElement定义的 WPF 核心级 API 构建的。
 
-\7) System.Windows.Controls.Control 类：表示 用户界面 (UI) 元素的基类，这些元素使用 ControlTemplate 来定义其外观。
+7) System.Windows.Controls.Control 类：表示 用户界面 (UI) 元素的基类，这些元素使用 ControlTemplate 来定义其外观。
 
-\8) System.Windows.Controls.ContentControl类：表示没有任何类型的内容表示单个控件。
+8) System.Windows.Controls.ContentControl类：表示没有任何类型的内容表示单个控件。
 
 WPF的绝大部分的控件，还包括窗口本身都是继承自ContentControl的。
 
@@ -55,15 +55,15 @@ ContentControl族包含的控件
 
  
 
-\9) System.Windows.Controls.ItemsControl 类：表示可用于提供项目的集合的控件。 
+9) System.Windows.Controls.ItemsControl 类：表示可用于提供项目的集合的控件。 
 
  以条目集合位内容的控件 ItemsControl
 
 特点： a.均派生自ItemsControl
 
-​      b.内容属性为Items或ItemsSource
+​			b.内容属性为Items或ItemsSource
 
-​       c.每种ItemsControl都对应有自己的条目容器(Item Container).
+​       	 c.每种ItemsControl都对应有自己的条目容器(Item Container).
 
 ItemsControl族包含的控件
 
@@ -74,9 +74,8 @@ ItemsControl族包含的控件
 
  
 
-\10) System.Windows.Controls.Panel类：为所有 Panel 元素提供基类。 使用 Panel 元素定位和排列在 Windows Presentation Foundation (WPF) 应用程序的子对象。
-
-11)System.Windows.Sharps.Sharp类：为 Ellipse、Polygon 和 Rectangle 之类的形状元素提供基类。
+10) System.Windows.Controls.Panel类：为所有 Panel 元素提供基类。 使用 Panel 元素定位和排列在 Windows Presentation Foundation (WPF) 应用程序的子对象。
+11) System.Windows.Sharps.Sharp类：为 Ellipse、Polygon 和 Rectangle 之类的形状元素提供基类。
 
  
 
@@ -95,7 +94,7 @@ ItemsControl族包含的控件
 
 　　　
 
-```
+```c#
 　public DispatcherOperation BeginInvoke(Delegate method, DispatcherPriority priority, params object[] args); 
 ```
 
@@ -130,11 +129,7 @@ DispatchPriority 优先级别
 
 **1、错误的更新方式**
 
- **XAML****代码**：
-
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
-```
+```xml
 <Window x:Class="WpfApp1.WindowThd"
 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -166,15 +161,11 @@ DispatchPriority 优先级别
  
 ```
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
  
 
 **后台代码：**
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
-```
+```c#
 using System;
 
 using System.Collections.Generic;
@@ -264,8 +255,6 @@ namespace WpfApp1
 }
 ```
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
  
 
 
@@ -277,9 +266,7 @@ namespace WpfApp1
 
   
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
-```
+```c#
 private void ModifyUI()
 
     {
@@ -301,8 +288,6 @@ private void ModifyUI()
 }
 ```
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
 ![img](../images/061733327519203.png)
 
 
@@ -310,9 +295,7 @@ private void ModifyUI()
 
  
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
-
-```
+```c#
 private void btnAppBeginInvoke_Click(object sender, RoutedEventArgs e)
 
     {
@@ -340,7 +323,7 @@ private void btnAppBeginInvoke_Click(object sender, RoutedEventArgs e)
  
 ```
 
-[![复制代码](../images/copycode-16641640392693.gif)](javascript:void(0);)
+
 
 ![img](../images/061733393769812.png)
 
